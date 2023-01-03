@@ -11,7 +11,7 @@ class QuoteController extends Controller
 	{
 		try
 		{
-			if (!count($quotes = Quote::all()->reverse()))
+			if (!count($quotes = Quote::paginate(3)->reverse()))
 			{
 				return response()->json([
 					'success' => 204,
