@@ -11,11 +11,10 @@ class ConfirmEmailController extends Controller
 	{
 		$request->fulfill();
 
-		return	redirect(config('app.front_url') . '/403', )
-		->with('message', json_encode([
-			'success' => 'successfully verified!',
-			'data'    => $request,
-		]));
+		return response()->json([
+			'success' => 200,
+			'message' => 'User verified',
+		]);
 	}
 
 	public function resendEmail(Request $request)
