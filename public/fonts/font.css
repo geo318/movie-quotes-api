@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('subset-HelveticaNeueRegular.woff2') format('woff2'),
+        url('subset-HelveticaNeueRegular.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('subset-HelveticaNeueLTGEO-45Light.woff2') format('woff2'),
+        url('subset-HelveticaNeueLTGEO-45Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('subset-HelveticaNeueMedium.woff2') format('woff2'),
+        url('subset-HelveticaNeueMedium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('subset-HelveticaNeueBold.woff2') format('woff2'),
+        url('subset-HelveticaNeueBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('subset-HelveticaNeueLTGEO-65Medium.woff2') format('woff2'),
+        url('subset-HelveticaNeueLTGEO-65Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('subset-HelveticaNeueLight.woff2') format('woff2'),
+        url('subset-HelveticaNeueLight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('subset-HelveticaNeueLTGEO-75Bold.woff2') format('woff2'),
+        url('subset-HelveticaNeueLTGEO-75Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
