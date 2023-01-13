@@ -40,8 +40,8 @@ width: 100% !important;
 <td class="content-cell">
 {{ Illuminate\Mail\Markdown::parse($slot) }}
 
-<p class="help">If you have any problems, please contact us: support@moviequotes.ge</p>
-<p class="c-footer">MovieQuotes Crew</p>
+<p class="help">{{ __('main.help') }}</p>
+<p class="c-footer">{{ __('main.footer') }}</p>
 </td>
 </tr>
 </table>
