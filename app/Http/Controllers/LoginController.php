@@ -8,8 +8,9 @@ class LoginController extends Controller
 {
 	public function getUser(Request $request)
 	{
-		info($request->headers);
-		if (!auth([])->user())
+		info(auth()->id());
+		// info(auth()->user());
+		if (!auth()->user($request->cookie('movie_quotes_session')))
 		{
 			return response(['user'=>null]);
 		}
