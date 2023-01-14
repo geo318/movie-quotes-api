@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -44,8 +45,8 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 		'email_verified_at' => 'datetime',
 	];
 
-	// public function sendPasswordResetNotification($token)
-	// {
-	// 	$this->notify(new ResetPasswordNotification(route('password.reset', $token)));
-	// }
+	public function sendPasswordResetNotification($token)
+	{
+		$this->notify(new ResetPasswordNotification(route('password.reset', $token)));
+	}
 }

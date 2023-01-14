@@ -9,9 +9,10 @@ class StorePasswordRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'token'    => 'required',
-			'email'    => 'required|email',
-			'password' => 'required|min:3|confirmed',
+			'token'           => 'required',
+			'email'           => 'required|email',
+			'password'        => 'required|min:8|max:15',
+			'repeat_password' => 'required|same:password',
 		];
 	}
 }
