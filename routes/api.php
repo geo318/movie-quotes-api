@@ -8,10 +8,10 @@ use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::post('/login', [LoginController::class, 'login']);
+	Route::post('/login', [LoginController::class, 'login']);
 	Route::post('/register', [RegisterController::class, 'register']);
 	Route::post('/forgot-password', [ResetPasswordController::class, 'postEmail'])->name('password.email');
-    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'sendEmail'])->name('password.reset');
+	Route::get('/reset-password/{token}', [ResetPasswordController::class, 'sendEmail'])->name('password.reset');
 	Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 });
 
