@@ -6,14 +6,8 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-	public function getUser(Request $request)
+	public function getUser()
 	{
-		info(auth()->id());
-		// info(auth()->user());
-		if (!auth()->user($request->cookie('movie_quotes_session')))
-		{
-			return response(['user'=>null]);
-		}
 		return response(['user' => auth()->user()]);
 	}
 
@@ -33,13 +27,5 @@ class LoginController extends Controller
 		request()->session()->invalidate();
 		request()->session()->regenerateToken();
 		return response(['message' => 'Logged out']);
-	}
-
-	public function checkAuth()
-	{
-		return response([
-			'status' => '200',
-			'message'=> 'authenticated',
-		]);
 	}
 }

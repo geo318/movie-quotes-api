@@ -22,9 +22,9 @@ class ResetPasswordController extends Controller
 			: response()->json(['error' => __($status)]);
 	}
 
-	public function postNewPassword($token)
+	public function sendEmail($token)
 	{
-		return view('auth.reset-password', ['token' => $token]);
+		return response(['status' => 200, 'token' => $token]);
 	}
 
 	public function resetPassword(StorePasswordRequest $request)
@@ -40,7 +40,7 @@ class ResetPasswordController extends Controller
 		);
 
 		return $status === Password::PASSWORD_RESET
-			? view('auth.reset-login')
-			: back()->withErrors(['email' => [__($status)]]);
+			? response(['message' => 'Password successfully reset'])
+			: response(['error' => __($status)]);
 	}
 }
