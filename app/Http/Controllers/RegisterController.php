@@ -18,6 +18,7 @@ class RegisterController extends Controller
 		event(new Registered($user = User::create($validated)));
 
 		Auth::login($user);
+
 		return response()->json([
 			'success' => 200,
 		]);

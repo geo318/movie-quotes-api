@@ -21,5 +21,5 @@
 </table>
 </td>
 </tr>
-<p class="subcopy-top">If clicking doesn't work, you can try copying and pasting it to your browser:</p>
+<p class="subcopy-top">{{ __('main.copy_top') }}</p>
 </table>
