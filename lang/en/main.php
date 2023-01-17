@@ -9,4 +9,5 @@ return [
 	'hi'            => 'Hola',
 	'button_top'    => 'Click the button below to verify your email address.',
 	'button'        => 'Verify account',
+	'invalid'       => 'Invalid credentials',
 ];
