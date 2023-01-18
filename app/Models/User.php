@@ -21,9 +21,11 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 	 */
 	protected $fillable = [
 		'username',
-        'avatar',
+		'avatar',
 		'email',
 		'password',
+		'gmail',
+		'email_verified_at',
 	];
 
 	/**
@@ -44,6 +46,11 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 	protected $casts = [
 		'email_verified_at' => 'datetime',
 	];
+
+	public function emails()
+	{
+		return $this->hasMany(Email::class);
+	}
 
 	public function sendPasswordResetNotification($token)
 	{
