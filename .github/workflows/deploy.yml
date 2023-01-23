@@ -39,7 +39,5 @@ jobs:
             cd movie-quotes
             cd lomidze-epic-movie-quotes-back
             git pull
-            npm ci
-            npm run prod
             composer i
             php artisan migrate --force
