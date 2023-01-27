@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Quote;
 use Illuminate\Database\Seeder;
 
@@ -16,11 +18,13 @@ class DatabaseSeeder extends Seeder
 	 */
 	public function run()
 	{
-		Quote::factory(10)->create();
-
-		// \App\Models\User::factory()->create([
-		//     'name' => 'Test User',
-		//     'email' => 'test@example.com',
-		// ]);
+		$i = 1;
+		while ($i < 35)
+		{
+			Quote::factory()->create();
+			Like::factory(20)->create(['quote_id'=>$i]);
+			Comment::factory(5)->create(['quote_id'=>$i]);
+            $i++;
+		}
 	}
 }
