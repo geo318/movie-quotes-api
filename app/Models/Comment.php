@@ -11,6 +11,12 @@ class Comment extends Model
 
 	protected $with = ['user'];
 
+	protected $fillable = [
+		'comment',
+		'user_id',
+		'quote_id',
+	];
+
 	public function user()
 	{
 		return $this->belongsTo(User::class)->select(['id', 'avatar', 'username']);

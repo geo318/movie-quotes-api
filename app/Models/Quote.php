@@ -33,6 +33,6 @@ class Quote extends Model
 
 	public function likes()
 	{
-		return $this->hasMany(Like::class)->select(['id', 'quote_id', 'like']);
+		return $this->hasMany(Like::class)->select(['id', 'quote_id', 'user_id', 'like']);
 	}
 }
