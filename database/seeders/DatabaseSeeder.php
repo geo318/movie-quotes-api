@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
 	public function run()
 	{
 		$i = 1;
-		while ($i < 35)
+		while ($i < 20)
 		{
 			Quote::factory()->create();
-			Like::factory(20)->create(['quote_id'=>$i]);
+			Like::factory(5)->create(['quote_id'=>$i]);
 			Comment::factory(5)->create(['quote_id'=>$i]);
             $i++;
 		}

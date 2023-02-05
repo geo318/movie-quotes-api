@@ -28,11 +28,16 @@ class Quote extends Model
 
 	public function comments()
 	{
-		return $this->hasMany(Comment::class)->select(['id', 'quote_id', 'user_id', 'comment']);
+		return $this->hasMany(Comment::class)->select(['id', 'quote_id', 'user_id', 'comment', 'created_at']);
 	}
 
 	public function likes()
 	{
-		return $this->hasMany(Like::class)->select(['id', 'quote_id', 'user_id', 'like']);
+		return $this->hasMany(Like::class)->select(['id', 'quote_id', 'user_id', 'like', 'created_at']);
+	}
+
+    public function notifications()
+	{
+		return $this->hasMany(Notification::class);
 	}
 }

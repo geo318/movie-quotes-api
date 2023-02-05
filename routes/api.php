@@ -27,5 +27,6 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 	Route::get('/quotes', [QuoteController::class, 'index'])->name('quotes');
 	Route::get('/user', [LoginController::class, 'getUser'])->name('user');
 	Route::post('/comment', [QuoteController::class, 'addComment'])->name('comment');
-	Route::get('/like', [QuoteController::class, 'addLike'])->name('like');
+	Route::get('/like', [QuoteController::class, 'toggleLike'])->name('like');
+	// Route::get('/notifications', [QuoteController::class, 'getCommentsAndLikes'])->name('notifications');
 });
