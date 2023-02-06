@@ -8,7 +8,6 @@ use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Notification;
 use App\Models\Quote;
-use Illuminate\Support\Facades\DB;
 
 class QuoteController extends Controller
 {
@@ -51,7 +50,6 @@ class QuoteController extends Controller
 			$like->delete();
 			return response(['message' => 'like removed']);
 		}
-
 		$like->save();
 
 		$this->dispatchNotification($request, null, $like->id);
@@ -65,27 +63,13 @@ class QuoteController extends Controller
 
 		$notification = Notification::firstOrNew([
 			'destination_user_id' => $user->id,
+			'user_id'             => $request['user_id'],
 			'quote_id'            => $request['quote_id'],
 			'like_id'             => $likeId,
 			'comment_id'          => $commentId,
 		]);
-
 		$notification->save();
 
 		NewNotification::dispatch($notification);
-	}
-
-	public function getNotifications()
-	{
-		// Notification::where('destination_user_id', auth()->user->id);
-		$data = DB::table('comments')
-			->select('quote_id', 'user_id', 'comment', 'created_at')
-			->union(
-				DB::table('likes')
-				->select('quote_id', 'user_id', 'like', 'created_at')
-			)
-			->get();
-
-		return response()->json($data);
 	}
 }

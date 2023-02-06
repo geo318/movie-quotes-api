@@ -3,12 +3,12 @@
 use App\Http\Controllers\ConfirmEmailController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
-// Auth::routes(['verify' => true]);
 Route::middleware('guest')->group(function () {
 	Route::post('/login', [LoginController::class, 'login']);
 	Route::post('/register', [RegisterController::class, 'register']);
@@ -28,5 +28,7 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 	Route::get('/user', [LoginController::class, 'getUser'])->name('user');
 	Route::post('/comment', [QuoteController::class, 'addComment'])->name('comment');
 	Route::get('/like', [QuoteController::class, 'toggleLike'])->name('like');
-	// Route::get('/notifications', [QuoteController::class, 'getCommentsAndLikes'])->name('notifications');
+	Route::get('/notifications', [NotificationController::class, 'getNotifications'])->name('notifications');
+	Route::get('/mark-as-read', [NotificationController::class, 'markAsRead'])->name('mark-read');
+	Route::get('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-read');
 });
