@@ -3,6 +3,7 @@
 use App\Http\Controllers\ConfirmEmailController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RegisterController;
@@ -31,4 +32,6 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 	Route::get('/notifications', [NotificationController::class, 'getNotifications'])->name('notifications');
 	Route::get('/mark-as-read', [NotificationController::class, 'markAsRead'])->name('mark-read');
 	Route::get('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-read');
+	Route::get('/movies', [MovieController::class, 'getMovies'])->name('movies');
+	Route::post('/add-quote', [QuoteController::class, 'create'])->name('new-quote');
 });

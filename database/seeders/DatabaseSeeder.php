@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 	public function run()
 	{
 		$i = 1;
-		while ($i < 20)
+		while ($i < 30)
 		{
 			Quote::factory()->create();
 			Like::factory(5)->create(['quote_id'=>$i]);

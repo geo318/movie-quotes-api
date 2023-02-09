@@ -11,10 +11,15 @@ class Notification extends Model
 
 	protected $guarded = [];
 
-	protected $with = ['user'];
+	protected $with = ['user', 'comment'];
 
 	public function user()
 	{
 		return $this->belongsTo(User::class);
+	}
+
+	public function comment()
+	{
+		return $this->belongsTo(Comment::class, 'comment_id', 'id');
 	}
 }
