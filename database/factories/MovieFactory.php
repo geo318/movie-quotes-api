@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Movie;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,8 +18,9 @@ class MovieFactory extends Factory
 	public function definition()
 	{
 		return [
-			'movie_title'=> fake()->sentence(8, true),
-			'user_id'    => User::factory(),
+			'movie_title' => ['en'=>fake()->sentence(5, true), 'ka'=>fake()->sentence(5, true)],
+			'user_id'     => User::factory(),
+			'year'        => fake()->numberBetween(1930, 2023),
 		];
 	}
 }

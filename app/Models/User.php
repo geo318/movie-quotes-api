@@ -14,11 +14,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 {
 	use HasApiTokens, HasFactory, Notifiable;
 
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array<int, string>
-	 */
 	protected $fillable = [
 		'username',
 		'avatar',
@@ -28,21 +23,11 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 		'email_verified_at',
 	];
 
-	/**
-	 * The attributes that should be hidden for serialization.
-	 *
-	 * @var array<int, string>
-	 */
 	protected $hidden = [
 		'password',
 		'remember_token',
 	];
 
-	/**
-	 * The attributes that should be cast.
-	 *
-	 * @var array<string, string>
-	 */
 	protected $casts = [
 		'email_verified_at' => 'datetime',
 	];
@@ -55,5 +40,30 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 	public function sendPasswordResetNotification($token)
 	{
 		$this->notify(new ResetPasswordNotification(route('password.reset', $token)));
+	}
+
+	public function comments()
+	{
+		return $this->hasMany(Comment::class);
+	}
+
+	public function quotes()
+	{
+		return $this->hasMany(Quote::class);
+	}
+
+	public function likes()
+	{
+		return $this->hasMany(Like::class);
+	}
+
+	public function movies()
+	{
+		return $this->hasMany(Movie::class);
+	}
+
+	public function notifications()
+	{
+		return $this->hasMany(Notification::class, 'destination_user_id');
 	}
 }

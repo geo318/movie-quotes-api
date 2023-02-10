@@ -19,10 +19,10 @@ class QuoteFactory extends Factory
 	public function definition()
 	{
 		return [
-			'quote_title'=> fake()->sentence(8, true),
-			'quote_image'=> $this->faker->fakeImage('quotes'),
-			'user_id'    => User::factory(),
-			'movie_id'   => Movie::factory(),
+			'quote_title' => ['en'=>fake()->sentence(5), 'ka'=>fake()->sentence(5)],
+			'quote_image' => $this->faker->fakeImage('quotes'),
+			'user_id'     => User::factory(),
+			'movie_id'    => Movie::factory(),
 		];
 	}
 }
