@@ -47,4 +47,10 @@ class Quote extends Model
 	{
 		return $this->hasMany(Notification::class);
 	}
+
+    public function save(array $options = [])
+    {
+        $this->attributes['quote_title'] = json_encode($this->translations['quote_title'], JSON_UNESCAPED_UNICODE);
+        return parent::save($options);
+    }
 }
