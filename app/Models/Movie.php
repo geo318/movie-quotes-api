@@ -35,4 +35,10 @@ class Movie extends Model
 	{
 		return $this->hasMany(Movie::class)->latest();
 	}
+
+	public function save(array $options = [])
+	{
+		$this->attributes['movie_title'] = json_encode($this->translations['movie_title'], JSON_UNESCAPED_UNICODE);
+		return parent::save($options);
+	}
 }

@@ -7,27 +7,34 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\StoreQuoteRequest;
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\Movie;
 use App\Models\Notification;
 use App\Models\Quote;
+use App\Helpers\Queries;
 
 class QuoteController extends Controller
 {
+	use Queries;
+
 	public function index()
 	{
-		if (!$quotes = Quote::select(['id', 'user_id', 'movie_id', 'quote_image', 'quote_title'])
-			->orderBy('id', 'desc')
-			->paginate(3))
+		$search = urldecode(request()->input('search', ''));
+		$type = $search ? $search[0] : '';
+
+		switch ($type)
 		{
-			return response()->json([
-				'error'   => 400,
-				'message' => 'something went wrong',
-			]);
+			case '@':
+				$movies = Movie::where('movie_title', 'like', '%' . ltrim($search, '@') . '%')->get();
+				$results = $this->paginateQuery(Quote::whereIn('movie_id', $movies->pluck('id')->toArray()));
+				break;
+			case '#':
+				$results = $this->paginateQuery(Quote::where('quote_title', 'like', '%' . ltrim($search, '#') . '%'));
+				break;
+			default:
+				$results = $this->paginateQuery(Quote::where('quote_title', 'like', "%{$search}%"));
 		}
 
-		if (count($quotes) >= 0)
-		{
-			return response()->json($quotes);
-		}
+		return response()->json($results);
 	}
 
 	public function create(StoreQuoteRequest $request)
