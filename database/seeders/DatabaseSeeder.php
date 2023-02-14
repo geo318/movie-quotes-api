@@ -11,20 +11,16 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-	/**
-	 * Seed the application's database.
-	 *
-	 * @return void
-	 */
 	public function run()
 	{
+		$this->call(GenreSeeder::class);
 		$i = 1;
-		while ($i < 30)
+		while ($i < 20)
 		{
 			Quote::factory()->create();
 			Like::factory(5)->create(['quote_id'=>$i]);
 			Comment::factory(5)->create(['quote_id'=>$i]);
-            $i++;
+			$i++;
 		}
 	}
 }
