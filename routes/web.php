@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Genre;
+use App\Models\Movie;
+use App\Models\Quote;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,3 +15,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', function () {
+	// foreach(Movie::all() as $movie){
+    //     $genres = Genre::inRandomOrder()->take(rand(1,3))->pluck('id');
+    //     $movie->genres()->attach($genres);
+    // }
+});

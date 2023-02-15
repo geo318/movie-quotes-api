@@ -33,5 +33,8 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 	Route::get('/mark-as-read', [NotificationController::class, 'markAsRead'])->name('mark-read');
 	Route::get('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-read');
 	Route::get('/movies', [MovieController::class, 'getMovies'])->name('movies');
+	Route::get('/movie', [MovieController::class, 'getMovie'])->name('movie');
 	Route::post('/add-quote', [QuoteController::class, 'create'])->name('new-quote');
+	Route::delete('/delete-quote', [QuoteController::class, 'delete'])->name('delete-quote');
+	Route::patch('/edit-quote/{quote}', [QuoteController::class, 'update'])->name('edit-quote');
 });
