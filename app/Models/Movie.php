@@ -44,4 +44,13 @@ class Movie extends Model
 	{
 		return $this->belongsToMany(Genre::class, 'genre_movie');
 	}
+
+	public function changeGenres($genres)
+	{
+		$existingGenres = $this->genres()->pluck('id')->toArray();
+		$newGenres = array_diff($genres, $existingGenres);
+		$this->genres()->attach($newGenres);
+		$removedGenres = array_diff($existingGenres, $genres);
+		$this->genres()->detach($removedGenres);
+	}
 }

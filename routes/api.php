@@ -35,6 +35,10 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 	Route::get('/movies', [MovieController::class, 'getMovies'])->name('movies');
 	Route::get('/movie', [MovieController::class, 'getMovie'])->name('movie');
 	Route::post('/add-quote', [QuoteController::class, 'create'])->name('new-quote');
-	Route::delete('/delete-quote', [QuoteController::class, 'delete'])->name('delete-quote');
 	Route::patch('/edit-quote/{quote}', [QuoteController::class, 'update'])->name('edit-quote');
+	Route::delete('/delete-quote', [QuoteController::class, 'delete'])->name('delete-quote');
+    Route::post('/add-movie', [MovieController::class, 'create'])->name('new-movie');
+    Route::patch('/edit-movie/{movie}', [MovieController::class, 'update'])->name('edit-movie');
+    Route::delete('/delete-movie/{movie}', [MovieController::class, 'delete'])->name('delete-quote');
+	Route::get('/genres', [MovieController::class, 'getGenres'])->name('genres');
 });
