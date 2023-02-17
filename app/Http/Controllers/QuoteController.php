@@ -18,7 +18,7 @@ class QuoteController extends Controller
 
 	public function index()
 	{
-		$search = urldecode(request()->input('search', ''));
+		$search = urldecode(request()->input('search'));
 		$type = $search ? $search[0] : '';
 
 		switch ($type)
@@ -55,6 +55,31 @@ class QuoteController extends Controller
 		$quote->save();
 
 		return response(['message'=>'Quote added']);
+	}
+
+	public function update(StoreQuoteRequest $request, Quote $quote)
+	{
+		$body = ['en'=>$request['quote_title_en'], 'ka'=>$request['quote_title_ka']];
+		$quote->setTranslations('quote_title', $body);
+		if (isset($request['quote_image']))
+		{
+			$quote['quote_image'] = '/storage/' . $request->file('quote_image')->store('quotes');
+		}
+		$quote->update();
+		return response(['message'=>'updated']);
+	}
+
+	public function delete()
+	{
+		if (!$quoteId = urldecode(request()->input('id')))
+		{
+			return;
+		}
+		if (!Quote::where(['id'=>$quoteId])->delete())
+		{
+			return response(['message'=>'Error deleting quote']);
+		}
+		return response(['message'=>'Quote deleted']);
 	}
 
 	public function addComment(StoreCommentRequest $request)

@@ -12,13 +12,16 @@ class Movie extends Model
 
 	use HasTranslations;
 
-	public $translatable = ['movie_title'];
+	public $translatable = ['movie_title', 'description', 'director'];
 
 	protected $fillable = [
 		'user_id',
 		'movie_title',
 		'year',
 		'movie_image',
+		'description',
+		'director',
+		'budget',
 	];
 
 	public function user()
@@ -28,17 +31,26 @@ class Movie extends Model
 
 	public function quotes()
 	{
-		return $this->hasMany(Quote::class)->latest();
-	}
-
-	public function movies()
-	{
-		return $this->hasMany(Movie::class)->latest();
+		return $this->hasMany(Quote::class);
 	}
 
 	public function save(array $options = [])
 	{
 		$this->attributes['movie_title'] = json_encode($this->translations['movie_title'], JSON_UNESCAPED_UNICODE);
 		return parent::save($options);
+	}
+
+	public function genres()
+	{
+		return $this->belongsToMany(Genre::class, 'genre_movie');
+	}
+
+	public function changeGenres($genres)
+	{
+		$existingGenres = $this->genres()->pluck('id')->toArray();
+		$newGenres = array_diff($genres, $existingGenres);
+		$this->genres()->attach($newGenres);
+		$removedGenres = array_diff($existingGenres, $genres);
+		$this->genres()->detach($removedGenres);
 	}
 }
