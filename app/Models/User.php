@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 		'password',
 		'gmail',
 		'email_verified_at',
+        'primary_email'
 	];
 
 	protected $hidden = [

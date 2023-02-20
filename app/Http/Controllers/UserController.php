@@ -6,6 +6,7 @@ use App\Http\Requests\StoreAddEmailRequest;
 use App\Http\Requests\StorePrimaryEmailRequest;
 use App\Models\Email;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -36,8 +37,19 @@ class UserController extends Controller
 			'email'             => $newPrimaryEmail,
 			'email_verified_at' => $email['email_verified_at'],
 		]);
-        $user['primary_email'] = $newPrimaryEmail;
-        $user->save();
+		$user['primary_email'] = $newPrimaryEmail;
+		$user->save();
 		return response(['message' => "{$email} set as primary"]);
+	}
+
+	public function deleteEmail(Request $request)
+	{
+		$user = User::where('id', auth()->id())->first();
+        if ($request->email === $user->email)
+        {
+            $user['email'] = $user->primary_email;
+            $user->update();
+        }
+        Email::where('email', $request->email)->delete();
 	}
 }
