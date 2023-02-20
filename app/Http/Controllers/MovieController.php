@@ -78,5 +78,6 @@ class MovieController extends Controller
 		}
 		$movie['year'] = $request['year'];
 		$movie['budget'] = $request['budget'];
+        
 	}
 }

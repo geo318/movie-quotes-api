@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-	public function getUser()
-	{
-		return response(['user' => auth()->user()]);
-	}
-
 	public function login(Request $request)
 	{
 		$email = Email::where('email', $request->email)->first();
@@ -34,5 +29,15 @@ class LoginController extends Controller
 		request()->session()->invalidate();
 		request()->session()->regenerateToken();
 		return response(['message' => 'Logged out']);
+	}
+
+	public function getUser()
+	{
+		return response(['user' => auth()->user()]);
+	}
+
+	public function checkLoggedIn()
+	{
+        return response(['message'=>'authenticated']);
 	}
 }

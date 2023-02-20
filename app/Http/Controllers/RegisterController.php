@@ -16,6 +16,7 @@ class RegisterController extends Controller
 		$credentials['password'] = bcrypt($credentials['password']);
 		array_pop($credentials);
 		$credentials['avatar'] = '/icons/avatar.png';
+        $credentials['primary_email'] = $request->email;
 
 		event(new Registered($user = User::create($credentials)));
 		Email::create([
