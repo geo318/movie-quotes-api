@@ -42,7 +42,7 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 	Route::delete('/delete-movie/{movie}', [MovieController::class, 'delete'])->name('delete-quote');
 	Route::get('/genres', [MovieController::class, 'getGenres'])->name('genres');
 	Route::post('/add-email', [UserController::class, 'addEmail'])->name('add-email');
-	Route::patch('/edit-user/{user}', [UserController::class, 'update'])->name('edit-user');
+	Route::patch('/edit-user', [UserController::class, 'update'])->name('edit-user');
     Route::get('/set-primary-email/{user}', [UserController::class, 'setPrimaryEmail'])->name('set-primary-email');
     Route::delete('/delete-email', [UserController::class, 'deleteEmail'])->name('delete-email');
 });
