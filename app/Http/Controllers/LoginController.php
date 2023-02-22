@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Email;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -10,15 +11,20 @@ class LoginController extends Controller
 {
 	public function login(Request $request)
 	{
+		$user = User::where('username', $request->email)->first();
 		$email = Email::where('email', $request->email)->first();
-		if (!$email || !Hash::check(request()->password, $email->user->password))
+		$password = $user?->password ?? $email?->user->password;
+
+		if (!$user && !$email || !Hash::check(request()->password, $password))
 		{
 			return response()->json([
 				'errors' => ['email' => __('main.invalid')],
 			], 401);
 		}
 
-		auth()->login($email->user);
+		$user ??= $email->user;
+
+		auth()->login($user);
 		request()->session()->regenerate();
 		return response(['user' => auth()->user()]);
 	}
@@ -38,6 +44,6 @@ class LoginController extends Controller
 
 	public function checkLoggedIn()
 	{
-        return response(['message'=>'authenticated']);
+		return response(['message'=>'authenticated']);
 	}
 }
