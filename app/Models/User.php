@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 		'password',
 		'gmail',
 		'email_verified_at',
+        'primary_email'
 	];
 
 	protected $hidden = [
@@ -31,6 +32,8 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 	protected $casts = [
 		'email_verified_at' => 'datetime',
 	];
+
+	protected $with = ['emails'];
 
 	public function emails()
 	{
@@ -65,5 +68,13 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 	public function notifications()
 	{
 		return $this->hasMany(Notification::class, 'destination_user_id');
+	}
+
+	public function verifyEmailNotification($user, $newEmail)
+	{
+		$email = $this->emails()->where('email', $newEmail)->first();
+		$user->update(['email'=>$newEmail]);
+		$user->sendEmailVerificationNotification();
+		$email->update(['email_verified_at' => 'toVerify']);
 	}
 }

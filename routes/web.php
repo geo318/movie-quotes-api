@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Genre;
-use App\Models\Movie;
-use App\Models\Quote;
+use App\Models\Email;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-	// foreach(Movie::all() as $movie){
-    //     $genres = Genre::inRandomOrder()->take(rand(1,3))->pluck('id');
-    //     $movie->genres()->attach($genres);
-    // }
+Route::get('/', function (Request $request) {
+	// $user = User::where('id', 229)->first();
+	// if ($request->email === $user->email)
+	// {
+	// 	$user['email'] = $user->primary_email;
+	// 	$user->update();
+	// }
+	// Email::where('email', $request->email)->delete();
 });

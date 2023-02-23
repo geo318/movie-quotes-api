@@ -47,7 +47,7 @@ class Movie extends Model
 
 	public function changeGenres($genres)
 	{
-		$existingGenres = $this->genres()->pluck('id')->toArray();
+		$existingGenres = $this->genres()->pluck('id')->toArray();  
 		$newGenres = array_diff($genres, $existingGenres);
 		$this->genres()->attach($newGenres);
 		$removedGenres = array_diff($existingGenres, $genres);

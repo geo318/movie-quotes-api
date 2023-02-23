@@ -9,9 +9,9 @@ class StoreRegisterRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'username'        => 'required|min:3|max:50|unique:users,username',
-			'email'           => 'required|email|unique:users,email',
-			'password'        => 'required|min:3|max:50',
+			'username'        => 'required|min:3|max:15|unique:users,username',
+			'email'           => 'required|email|unique:users,email|unique:emails,email',
+			'password'        => 'required|min:8|max:15',
 			'repeat_password' => 'required|same:password',
 		];
 	}
