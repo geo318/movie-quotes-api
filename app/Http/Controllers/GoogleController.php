@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Email;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Symfony\Component\HttpFoundation\Request;
 
 class GoogleController extends Controller
 {
@@ -16,9 +16,13 @@ class GoogleController extends Controller
 		return response()->json(['url' => $url]);
 	}
 
-	public function handleProviderCallback(Request $request)
+	public function handleProviderCallback()
 	{
 		$provider_user = Socialite::driver('google')->stateless()->user();
+		if (Email::where('email', $provider_user->email))
+		{
+			return response()->json(['message' => __('main.already_registered')], 422);
+		}
 		$user = User::updateOrCreate([
 			'gmail' => $provider_user->email,
 		], [
