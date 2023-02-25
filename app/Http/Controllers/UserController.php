@@ -33,33 +33,25 @@ class UserController extends Controller
 
 	public function addEmail(StoreAddEmailRequest $request)
 	{
-		Email::create([
+		$user = User::where('id', auth()->id())->first();
+		$email = Email::create([
 			'user_id' => auth()->id(),
-			'email'   => $request['email'],
+			'email'   => $newPrimaryEmail = $request['email'],
 		]);
-		return response(['message'=>'Email added']);
+		$user->update([
+			'email'     => $newPrimaryEmail,
+		]);
+
+		$user->sendEmailVerificationNotification();
+		return response(['message' => "Verification email sent to {$email->email}"]);
 	}
 
 	public function setPrimaryEmail(StorePrimaryEmailRequest $request, User $user)
 	{
-		$newPrimaryEmail = $request->email;
-		$userEmails = $user->emails;
-		$email = $userEmails->where('email', $newPrimaryEmail)->first();
-
-		if (!$email->email_verified_at)
-		{
-			$user->update(['email' => $email->email]);
-			$user->sendEmailVerificationNotification();
-
-			return response(['message' => "Verification email sent to {$email->email}"]);
-		}
-
 		$user->update([
-			'email'             => $newPrimaryEmail,
-			'email_verified_at' => $email['email_verified_at'],
+			'primary_email'     => $email = $request->email,
 		]);
-		$user['primary_email'] = $newPrimaryEmail;
-		$user->save();
+
 		return response(['message' => "{$email} set as primary"]);
 	}
 
