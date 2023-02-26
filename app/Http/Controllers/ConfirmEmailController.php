@@ -22,8 +22,7 @@ class ConfirmEmailController extends Controller
 
 		$email['email_verified_at'] = Carbon::now();
 		$email->save();
-		$user['primary_email'] = $user->email;
-		$user->save();
-		return response(['message' => "Set primary email - {$email}"]);
+
+		return response(['message' => "{$email} verified"]);
 	}
 }

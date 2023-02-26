@@ -9,7 +9,7 @@ class StorePrimaryEmailRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'email' => 'required|unique:users,email|unique:users,gmail|exists:emails,email',
+			'email' => 'required|unique:users,gmail|exists:emails,email',
 		];
 	}
 }
