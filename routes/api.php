@@ -25,6 +25,7 @@ Route::get('/email/verify/{id}/{hash}', [ConfirmEmailController::class, 'verifyE
 
 Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 	Route::get('/quotes', [QuoteController::class, 'index'])->name('quotes');
+	Route::get('/quote/{quote}', [QuoteController::class, 'getQuote'])->name('quote');
 	Route::get('/user', [LoginController::class, 'getUser'])->name('user');
 	Route::get('/check', [LoginController::class, 'checkLoggedIn'])->name('check');
 	Route::post('/comment', [QuoteController::class, 'addComment'])->name('comment');
@@ -43,6 +44,6 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 	Route::get('/genres', [MovieController::class, 'getGenres'])->name('genres');
 	Route::post('/add-email', [UserController::class, 'addEmail'])->name('add-email');
 	Route::patch('/edit-user', [UserController::class, 'update'])->name('edit-user');
-    Route::get('/set-primary-email/{user}', [UserController::class, 'setPrimaryEmail'])->name('set-primary-email');
-    Route::delete('/delete-email', [UserController::class, 'deleteEmail'])->name('delete-email');
+	Route::get('/set-primary-email/{user}', [UserController::class, 'setPrimaryEmail'])->name('set-primary-email');
+	Route::delete('/delete-email', [UserController::class, 'deleteEmail'])->name('delete-email');
 });
