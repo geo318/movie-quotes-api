@@ -37,6 +37,11 @@ class QuoteController extends Controller
 		return response()->json($results);
 	}
 
+	public function getQuote(Quote $quote)
+	{
+		return response($quote);
+	}
+
 	public function create(StoreQuoteRequest $request)
 	{
 		$quote = new Quote();
