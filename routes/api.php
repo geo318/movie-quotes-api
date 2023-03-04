@@ -40,7 +40,7 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 	Route::delete('/delete-quote', [QuoteController::class, 'delete'])->name('delete-quote');
 	Route::post('/add-movie', [MovieController::class, 'create'])->name('new-movie');
 	Route::patch('/edit-movie/{movie}', [MovieController::class, 'update'])->name('edit-movie');
-	Route::delete('/delete-movie/{movie}', [MovieController::class, 'delete'])->name('delete-quote');
+	Route::delete('/delete-movie/{movie}', [MovieController::class, 'delete'])->name('delete-movie');
 	Route::get('/genres', [MovieController::class, 'getGenres'])->name('genres');
 	Route::post('/add-email', [UserController::class, 'addEmail'])->name('add-email');
 	Route::patch('/edit-user', [UserController::class, 'update'])->name('edit-user');
