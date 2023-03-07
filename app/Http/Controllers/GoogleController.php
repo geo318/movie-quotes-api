@@ -23,15 +23,14 @@ class GoogleController extends Controller
 		{
 			return response()->json(['message' => __('main.already_registered')], 422);
 		}
-		$user = User::updateOrCreate([
-			'gmail' => $provider_user->email,
-		], [
-			'username'          => $provider_user->name,
-			'gmail'             => $provider_user->email,
-			'email'             => $provider_user->email,
-			'avatar'            => $provider_user->avatar,
-			'email_verified_at' => Carbon::now(),
-		]);
+		$user = User::where(['gmail' => $provider_user->email])->first() ??
+			User::create([
+				'username'          => $provider_user->name,
+				'gmail'             => $provider_user->email,
+				'email'             => $provider_user->email,
+				'avatar'            => $provider_user->avatar,
+				'email_verified_at' => Carbon::now(),
+			]);
 
 		if (!Auth::login($user))
 		{
