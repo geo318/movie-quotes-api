@@ -37,8 +37,7 @@ jobs:
           script_stop: true
           script: |
             cd apps
-            cd movie-quotes
-            cd lomidze-epic-movie-quotes-back
+            cd movie-quotes-api
             git pull
             composer i
             php artisan migrate --force
